@@ -53,12 +53,12 @@ const Footer = () => {
             {/* Bottom Section */}
             <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center mt-4">
                 <p className="text-sm text-gray-400">&copy; {new Date().getFullYear()} Grimm United. All Rights Reserved. 🌸</p>
-                <a
+                {/* <a
                     href="mailto:support@grimmunited.com"
                     className="text-sm text-gray-400 hover:underline"
                 >
                     support@grimmunited.com
-                </a>
+                </a> */}
             </div>
 
             {/* Overlay */}
