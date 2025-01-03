@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { RefObject } from 'react';
 import { Sword, Cherry } from 'lucide-react';
 import { useInView } from './hooks/useInView';
 import { useInterestCounter } from './hooks/useInterestCounter';
 import { BrandLogo } from './BrandLogo';
 import { Link } from 'react-router-dom';
 
-export function Hero() {
+interface HeroProps {
+  interestFormRef: RefObject<HTMLDivElement>;
+}
+
+const Hero: React.FC<HeroProps> = ({ interestFormRef }) => {
   const [ref, isVisible] = useInView();
   const interestCount = useInterestCounter(1234);
+
+  const handleScrollToForm = () => {
+    if (interestFormRef.current) {
+      interestFormRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -26,16 +36,15 @@ export function Hero() {
           <p className="text-xl md:text-2xl mb-8 text-[#2C2C2C]/80 dark:text-white/80 font-noto">
             Holy Roots, Grimm Heart, Fearless Soul
           </p>
-          <Link to="/interest-form">
-            <button
-              className="bg-[#FF4B8C] text-white px-8 py-4 rounded-full font-semibold shadow-lg
+          <button
+            onClick={handleScrollToForm}
+            className="bg-[#FF4B8C] text-white px-8 py-4 rounded-full font-semibold shadow-lg
                      hover:bg-[#FF4B8C]/90 transform hover:scale-105 transition-all duration-300
                      flex items-center justify-center space-x-2 mx-auto"
-            >
-              <Sword className="w-5 h-5" />
-              <span>Show Interest & Get 10% Cashback</span>
-            </button>
-          </Link>
+          >
+            <Sword className="w-5 h-5" />
+            <span>Show Interest & Get 10% Cashback</span>
+          </button>
 
           <div className="mt-8 flex items-center justify-center text-[#2C2C2C]/70 dark:text-white/70">
             <Cherry className="w-5 h-5 mr-2" />
@@ -62,4 +71,6 @@ export function Hero() {
       </div>
     </div>
   );
-}
+};
+
+export default Hero;
