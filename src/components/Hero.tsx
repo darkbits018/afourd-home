@@ -3,6 +3,7 @@ import { Sword, Cherry } from 'lucide-react';
 import { useInView } from './hooks/useInView';
 import { useInterestCounter } from './hooks/useInterestCounter';
 import { BrandLogo } from './BrandLogo';
+import { Link } from 'react-router-dom';
 
 export function Hero() {
   const [ref, isVisible] = useInView();
@@ -18,30 +19,31 @@ export function Hero() {
           className="w-full h-full object-cover"
         />
       </div>
-      
+
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <BrandLogo />
           <p className="text-xl md:text-2xl mb-8 text-[#2C2C2C]/80 dark:text-white/80 font-noto">
             Holy Roots, Grimm Heart, Fearless Soul
           </p>
-          
-          <button 
-            className="bg-[#FF4B8C] text-white px-8 py-4 rounded-full font-semibold shadow-lg
+          <Link to="/interest-form">
+            <button
+              className="bg-[#FF4B8C] text-white px-8 py-4 rounded-full font-semibold shadow-lg
                      hover:bg-[#FF4B8C]/90 transform hover:scale-105 transition-all duration-300
                      flex items-center justify-center space-x-2 mx-auto"
-          >
-            <Sword className="w-5 h-5" />
-            <span>Show Interest & Get 10% Cashback</span>
-          </button>
-          
+            >
+              <Sword className="w-5 h-5" />
+              <span>Show Interest & Get 10% Cashback</span>
+            </button>
+          </Link>
+
           <div className="mt-8 flex items-center justify-center text-[#2C2C2C]/70 dark:text-white/70">
             <Cherry className="w-5 h-5 mr-2" />
             <span>{interestCount.toLocaleString()} people interested</span>
           </div>
         </div>
       </div>
-      
+
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <div
